@@ -217,8 +217,8 @@
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       }
       .timeline-marker.q4-start { left: 0%; background: var(--primary); }
-      .timeline-marker.q4-mid { left: 50%; background: var(--secondary); }
-      .timeline-marker.q4-end { left: 100%; background: var(--primary-dark); }
+      .timeline-marker.q4-mid { left: 50%; background: var(--primary); }
+      .timeline-marker.q4-end { left: 100%; background: var(--primary); }
       .timeline-labels {
         display: flex;
         justify-content: space-between;
@@ -246,7 +246,7 @@
         transform: scale(1.3);
         z-index: 10;
       }
-      .epic-dot.p5 { background: var(--primary); }
+      .epic-dot.p5 { background: var(--secondary); }
       .epic-dot.p4 { background: var(--secondary); }
       
       .tooltip {
@@ -321,7 +321,7 @@
             <div class="card-title">Key Success Metrics</div>
             <ul class="list">
               <li><strong>Q4 2025:</strong> 0 critical bugs open; ≥95% pass rate on critical paths; QA automation gating enforced</li>
-              <li><strong>Q1 2026:</strong> Epic integration live; V4 UI deployed; customer reports operational; E2E coverage expanded</li>
+              <li><strong>Q1 2026:</strong> Epic integration started; V4 UI deployed; customer reports operational; E2E coverage expanded</li>
               <li><strong>Platform Health:</strong> Consolidated admin area; responsive design; accessibility compliance; user feedback system</li>
             </ul>
           </div>
@@ -442,10 +442,70 @@
           <div class="timeline-label active">Jan 2026</div>
           <div class="timeline-label">Feb 2026</div>
           <div class="timeline-label">Mar 2026</div>
+      </div>
+
+      <!-- Q2 Timeline -->
+      <div class="timeline">
+        <div class="timeline-title">Q2 2026 Timeline</div>
+        <div class="timeline-track">
+          <div class="timeline-marker q4-start"></div>
+          <div class="timeline-marker q4-mid"></div>
+          <div class="timeline-marker q4-end"></div>
+          
+          <!-- Q2 Epics -->
+          <div class="epic-dot p5" style="left: 20%;">
+            <div class="tooltip">3D Image Modeling</div>
+          </div>
+          <div class="epic-dot p5" style="left: 60%;">
+            <div class="tooltip">CHOP Integration</div>
+          </div>
+        </div>
+        <div class="timeline-labels">
+          <div class="timeline-label active">Apr 2026</div>
+          <div class="timeline-label">May 2026</div>
+          <div class="timeline-label">Jun 2026</div>
         </div>
       </div>
 
-      <!-- Q4 2025 -->
+      <!-- Q3 Timeline -->
+      <div class="timeline">
+        <div class="timeline-title">Q3 2026 Timeline</div>
+        <div class="timeline-track">
+          <div class="timeline-marker q4-start"></div>
+          <div class="timeline-marker q4-mid"></div>
+          <div class="timeline-marker q4-end"></div>
+          
+          <!-- Q3 Epics -->
+          <div class="epic-dot p5" style="left: 20%;">
+            <div class="tooltip">LLS Integration</div>
+          </div>
+        </div>
+        <div class="timeline-labels">
+          <div class="timeline-label active">Jul 2026</div>
+          <div class="timeline-label">Aug 2026</div>
+          <div class="timeline-label">Sep 2026</div>
+        </div>
+      </div>
+
+      <!-- Q4 Timeline -->
+      <div class="timeline">
+        <div class="timeline-title">Q4 2026 Timeline</div>
+        <div class="timeline-track">
+          <div class="timeline-marker q4-start"></div>
+          <div class="timeline-marker q4-mid"></div>
+          <div class="timeline-marker q4-end"></div>
+          
+          <!-- Q4 Epics -->
+          <div class="epic-dot p5" style="left: 20%;">
+            <div class="tooltip">Histosonics Integration</div>
+          </div>
+        </div>
+        <div class="timeline-labels">
+          <div class="timeline-label active">Oct 2026</div>
+          <div class="timeline-label">Nov 2026</div>
+          <div class="timeline-label">Dec 2026</div>
+        </div>
+      </div>
       <div class="section">
         <div class="title">
           <h2>Q4 2025 — October → December</h2>
@@ -676,6 +736,87 @@
               <li>Expand beyond critical flows; stabilize.</li>
               <li>Exit: Target coverage achieved; stable pipelines.</li>
             </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q2 2026 -->
+      <div class="section">
+        <div class="title">
+          <h2>Q2 2026 — April → June</h2>
+          <span class="badge">Innovate</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">
+              3D Image Modeling
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>Partner with VOKA for medically accurate 3D anatomy and pathology models.</li>
+              <li>Integrate VOKA's 3D medical animation services and VR/AR healthcare solutions.</li>
+              <li>Implement interactive 3D atlas for enhanced clinical visualization and education.</li>
+              <li><em>Exit</em>: VOKA 3D models integrated; interactive medical visualization platform live</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 0%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              CHOP Integration
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>Collaborate with Children's Hospital of Philadelphia for specialized pediatric care.</li>
+              <li>Integrate CHOP's clinical protocols and treatment guidelines.</li>
+              <li><em>Exit</em>: Pediatric care pathways established; CHOP protocols live</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 0%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q3 2026 -->
+      <div class="section">
+        <div class="title">
+          <h2>Q3 2026 — July → September</h2>
+          <span class="badge">Collaborate</span>
+        </div>
+        <div class="grid">
+          <div class="card span-12">
+            <div class="card-title">
+              LLS Integration
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>Partner with Leukemia & Lymphoma Society for comprehensive blood cancer care.</li>
+              <li>Integrate LLS patient support resources and treatment protocols.</li>
+              <li>Establish research collaboration pathways for hematologic malignancies.</li>
+              <li><em>Exit</em>: LLS resources integrated; blood cancer care pathways established</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 0%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q4 2026 -->
+      <div class="section">
+        <div class="title">
+          <h2>Q4 2026 — October → December</h2>
+          <span class="badge">Advance</span>
+        </div>
+        <div class="grid">
+          <div class="card span-12">
+            <div class="card-title">
+              Histosonics Integration
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>Integrate Histosonics' non-invasive histotripsy technology for tissue treatment.</li>
+              <li>Implement sonic beam therapy protocols for liver tumor treatment.</li>
+              <li>Establish treatment planning and monitoring capabilities.</li>
+              <li><em>Exit</em>: Histotripsy technology integrated; non-invasive treatment options available</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 0%"></span></div>
           </div>
         </div>
       </div>
