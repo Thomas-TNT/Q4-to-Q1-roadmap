@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MCG Delivery Roadmap — Q4 2025 to Q1 2026</title>
+    <style>
+      :root {
+        /* MCG colors from Figma references */
+        --primary-light: #e3e8ef;
+        --primary: #1052a2;   /* Primary Blue */
+        --primary-dark: #0d4281;
+        --secondary-light: #f8f0d1;
+        --secondary: #f1c24c; /* Secondary Yellow */
+        --secondary-dark: #c49a3a;
+        --text: #0f172a;
+        --muted: #475569;
+        --bg: #f6f8fb;
+        --white: #ffffff;
+        --success: #11a36a;
+        --warning: #d97706;
+        --danger: #e11d48;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+          Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+          "Segoe UI Emoji";
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+      }
+
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .header {
+        background: linear-gradient(120deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: var(--white);
+        padding: 28px 24px;
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(16, 82, 162, 0.25);
+      }
+      .header h1 { margin: 0 0 6px; font-size: 28px; }
+      .header p { margin: 0; opacity: 0.95; }
+
+      .meta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255,255,255,0.2);
+        font-size: 12px;
+      }
+      .chip small { opacity: 0.9; }
+
+      .section {
+        margin-top: 24px;
+        background: var(--white);
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        box-shadow: 0 6px 14px rgba(16, 82, 162, 0.06);
+        overflow: hidden;
+      }
+      .section .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 18px;
+        background: linear-gradient(90deg, var(--secondary-light), #fff);
+        border-bottom: 1px solid #eef2f7;
+      }
+      .section .title h2 { margin: 0; font-size: 18px; color: var(--primary-dark); }
+      .section .title .badge {
+        padding: 6px 10px;
+        border-radius: 10px;
+        background: var(--secondary);
+        color: #1f2937;
+        font-weight: 600;
+        font-size: 12px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .card {
+        grid-column: span 12;
+        background: #fff;
+        border: 1px solid #eef2f7;
+        border-radius: 12px;
+        padding: 14px;
+      }
+      @media (min-width: 900px) {
+        .card.span-6 { grid-column: span 6; }
+        .card.span-4 { grid-column: span 4; }
+        .card.span-8 { grid-column: span 8; }
+      }
+
+      .card .card-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+      .pill {
+        padding: 2px 8px;
+        font-size: 11px;
+        border-radius: 999px;
+        border: 1px solid #e5e7eb;
+        background: var(--primary-light);
+        color: var(--primary-dark);
+        font-weight: 600;
+      }
+      .pill.priority { background: #fff7e5; color: #7a4d00; border-color: #ffe8b5; }
+      .pill.dep { background: #eef6ff; color: #0b3d74; border-color: #cfe3ff; }
+      .pill.risk { background: #fff1f2; color: #9f1239; border-color: #ffd5dd; }
+
+      .list { margin: 8px 0 0; padding-left: 18px; }
+      .list li { margin: 6px 0; }
+
+      .progress {
+        height: 8px;
+        border-radius: 6px;
+        background: #eef2f7;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+      .progress > span {
+        display: block;
+        height: 100%;
+        width: var(--value, 0%);
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+      }
+
+      .legend {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 8px;
+      }
+      .legend .key { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+      .legend .swatch { width: 10px; height: 10px; border-radius: 2px; }
+      .legend .swatch.p { background: var(--primary); }
+      .legend .swatch.s { background: var(--secondary); }
+      .legend .swatch.ok { background: var(--success); }
+      .legend .swatch.warn { background: var(--warning); }
+      .legend .swatch.err { background: var(--danger); }
+
+      .footer {
+        text-align: right;
+        color: var(--muted);
+        font-size: 12px;
+        margin-top: 16px;
+      }
+
+      .toolbar { display: flex; gap: 8px; }
+      .btn {
+        appearance: none;
+        padding: 8px 12px;
+        border-radius: 10px;
+        border: 1px solid #dbe2ea;
+        background: #fff;
+        color: var(--text);
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn.primary { background: var(--secondary); border-color: var(--secondary-dark); }
+
+      .timeline {
+        margin: 24px 0;
+        background: var(--white);
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 6px 14px rgba(16, 82, 162, 0.06);
+      }
+      .timeline-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--primary-dark);
+        margin-bottom: 16px;
+        text-align: center;
+      }
+      .timeline-track {
+        position: relative;
+        height: 8px;
+        background: #eef2f7;
+        border-radius: 6px;
+        margin: 16px 0;
+      }
+      .timeline-marker {
+        position: absolute;
+        top: -6px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 3px solid var(--white);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+      .timeline-marker.q4-start { left: 0%; background: var(--primary); }
+      .timeline-marker.q4-mid { left: 50%; background: var(--secondary); }
+      .timeline-marker.q4-end { left: 100%; background: var(--primary-dark); }
+      .timeline-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .timeline-label {
+        text-align: center;
+        font-weight: 600;
+      }
+      .timeline-label.active { color: var(--primary-dark); }
+
+      .epic-dot {
+        position: absolute;
+        top: -8px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid var(--white);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      .epic-dot:hover {
+        transform: scale(1.3);
+        z-index: 10;
+      }
+      .epic-dot.p5 { background: var(--primary); }
+      .epic-dot.p4 { background: var(--secondary); }
+      
+      .tooltip {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--primary-dark);
+        color: var(--white);
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        z-index: 20;
+      }
+      .tooltip::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 5px solid transparent;
+        border-top-color: var(--primary-dark);
+      }
+      .epic-dot:hover .tooltip {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>MCG Delivery Roadmap — Q4 2025 to Q1 2026</h1>
+        <p>Prioritized execution across Stability, UX, Platform, and Reporting • Q4 2025 (Oct-Dec) → Q1 2026 (Jan-Mar)</p>
+        <div class="meta">
+          <span class="chip"><small>Priority</small><strong>5 → 3 focus</strong></span>
+          <span class="chip"><small>Freeze</small><strong>Mid-December</strong></span>
+          <span class="chip"><small>Definition of Done</small><strong>Prod + QA/E2E</strong></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <h2>Executive Summary</h2>
+          <div class="toolbar">
+            <button class="btn primary" onclick="window.print()">Export / Print</button>
+          </div>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">Q4 2025 Objectives</div>
+            <ul class="list">
+              <li>Stabilize clinical workflows; resolve E2E regression findings (P5).</li>
+              <li>Implement QA automation setup and DevOps modernization (P4).</li>
+              <li>Deliver content excellence: Paranasal Sinus module and multilingual support.</li>
+              <li>Establish analytics foundation with Freshpaint implementation.</li>
+            </ul>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">Q1 2026 Objectives</div>
+            <ul class="list">
+              <li>Start Epic EHR integration and V4 UI/UX modernization.</li>
+              <li>Deliver selective resource sharing and customer reporting capabilities.</li>
+              <li>Expand E2E coverage and stabilize quality pipelines.</li>
+              <li>Enable custom resources and internal reporting dashboards.</li>
+            </ul>
+          </div>
+          <div class="card span-12">
+            <div class="card-title">Key Success Metrics</div>
+            <ul class="list">
+              <li><strong>Q4 2025:</strong> 0 critical bugs open; ≥95% pass rate on critical paths; QA automation gating enforced</li>
+              <li><strong>Q1 2026:</strong> Epic integration live; V4 UI deployed; customer reports operational; E2E coverage expanded</li>
+              <li><strong>Platform Health:</strong> Consolidated admin area; responsive design; accessibility compliance; user feedback system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="timeline">
+        <div class="timeline-title">Q4 2025 Timeline</div>
+        <div class="timeline-track">
+          <div class="timeline-marker q4-start"></div>
+          <div class="timeline-marker q4-mid"></div>
+          <div class="timeline-marker q4-end"></div>
+          
+          <!-- Q4 P5 Epics -->
+          <div class="epic-dot p5" style="left: 5%;">
+            <div class="tooltip">MV30-2174: E2E Regression Testing (October)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 15%;">
+            <div class="tooltip">MV30-2514: Bugs Reported-25Q410 (October)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 70%;">
+            <div class="tooltip">MV30-1884: Internal Reports (Mid-November)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 65%;">
+            <div class="tooltip">MV30-2711: Paranasal Sinus Module (November)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 60%;">
+            <div class="tooltip">MV30-2035: Print Functionality (November)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 10%;">
+            <div class="tooltip">MV30-2309: Multilanguage (Spanish) (October)</div>
+          </div>
+          
+          <!-- Q4 P4 Epics -->
+          <div class="epic-dot p4" style="left: 40%;">
+            <div class="tooltip">MV30-2314: Admin Consolidation (October)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 30%;">
+            <div class="tooltip">MV30-2636: Q4 General requests</div>
+          </div>
+          <div class="epic-dot p4" style="left: 40%;">
+            <div class="tooltip">MV30-2311: Database migrations via ORM</div>
+          </div>
+          <div class="epic-dot p4" style="left: 55%;">
+            <div class="tooltip">MV30-2310: Roles & Feature Gating | Therapist role, collaborating physicians, caregiver role</div>
+          </div>
+          <div class="epic-dot p4" style="left: 75%;">
+            <div class="tooltip">MV30-2040: Customer Reports (Mid-November)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 80%;">
+            <div class="tooltip">MV30-2048: Custom Resources (Mid-November)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 36%;">
+            <div class="tooltip">MV30-2313: DevOps Modernization (October)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 20%;">
+            <div class="tooltip">MV30-2425: Screen Responsiveness (October)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 45%;">
+            <div class="tooltip">Freshpaint Implementation (Beginning November)</div>
+          </div>
+          <div class="epic-dot p5" style="left: 70%;">
+            <div class="tooltip">MV30-2173: QA Automation Setup</div>
+          </div>
+          <div class="epic-dot p5" style="left: 80%;">
+            <div class="tooltip">MV30-2048: White Labeling</div>
+          </div>
+          <div class="epic-dot p5" style="left: 85%;">
+            <div class="tooltip">ADA compliance across all of application</div>
+          </div>
+          <div class="epic-dot p5" style="left: 90%;">
+            <div class="tooltip">User Feedback button</div>
+          </div>
+        </div>
+        <div class="timeline-labels">
+          <div class="timeline-label active">Oct 2025</div>
+          <div class="timeline-label">Nov 2025</div>
+          <div class="timeline-label">Dec 2025</div>
+        </div>
+      </div>
+
+      <!-- Q1 Timeline -->
+      <div class="timeline">
+        <div class="timeline-title">Q1 2026 Timeline</div>
+        <div class="timeline-track">
+          <div class="timeline-marker q4-start"></div>
+          <div class="timeline-marker q4-mid"></div>
+          <div class="timeline-marker q4-end"></div>
+          
+          <!-- Q1 Epics -->
+          <div class="epic-dot p4" style="left: 5%;">
+            <div class="tooltip">MV30-2047: Integration into Epic (Beginning January)</div>
+          </div>
+          <div class="epic-dot p4" style="left: 10%;">
+            <div class="tooltip">MV30-2522: V4 UI/UX update</div>
+          </div>
+          
+          <div class="epic-dot p5" style="left: 20%;">
+            <div class="tooltip">MV30-1884: Internal Reports</div>
+          </div>
+          <div class="epic-dot p4" style="left: 40%;">
+            <div class="tooltip">MV30-2040: Customer Reports</div>
+          </div>
+          <div class="epic-dot p4" style="left: 20%;">
+            <div class="tooltip">MV30-1991: Selective resource sharing</div>
+          </div>
+         
+          <div class="epic-dot p4" style="left: 70%;">
+            <div class="tooltip">MV30-2048: Custom Resources</div>
+          </div>
+        
+          <div class="epic-dot p4" style="left: 90%;">
+            <div class="tooltip">E2E Coverage Expansion</div>
+          </div>
+        </div>
+        <div class="timeline-labels">
+          <div class="timeline-label active">Jan 2026</div>
+          <div class="timeline-label">Feb 2026</div>
+          <div class="timeline-label">Mar 2026</div>
+        </div>
+      </div>
+
+      <!-- Q4 2025 -->
+      <div class="section">
+        <div class="title">
+          <h2>Q4 2025 — October → December</h2>
+          <span class="badge">Deliver</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">
+              P5 — Clinical Trust & Stability
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>MV30-2173 — QA Automation Setup</li>
+              <li>MV30-2174 — E2E Regression Testing Suite Findings</li>
+              <li>MV30-2514 — Bugs Reported-25Q410</li>
+              <li><em>Exit</em>: 0 critical open; ≥95% pass rate on critical paths</li>
+            </ul>
+          </div>
+
+          <div class="card span-6">
+            <div class="card-title">
+              P5 — Content Excellence
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>MV30-2711 — Module: Paranasal Sinus/Nasal Cavity (OSU)</li>
+              <li>MV30-2035 — Print Functionality</li>
+              <li>MV30-2309 — Multilanguage Enablement (Spanish scope)</li>
+              <li><em>Exit</em>: Content QA sign-off; multilingual support live</li>
+            </ul>
+          </div>
+
+          <div class="card span-6">
+            <div class="card-title">
+              P4 — Infrastructure & DevOps
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>MV30-2314 — Admin Consolidation</li>
+              <li>MV30-2313 — DevOps & Deploy Modernization</li>
+              <li>MV30-2425 — Screen Size Responsiveness</li>
+              <li><em>Exit</em>: Consolidated admin area; responsive design</li>
+            </ul>
+          </div>
+
+          <div class="card span-6">
+            <div class="card-title">
+              P4 — User Experience & Features
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>MV30-2310 — Roles, Personas & Feature Gating</li>
+              <li>MV30-2636 — Q4 General requests</li>
+              <li>MV30-2311 — Database migrations via ORM</li>
+              <li><em>Exit</em>: Role gates hardened; migration system in place</li>
+            </ul>
+          </div>
+
+          <div class="card span-12">
+            <div class="card-title">
+              P4 — Analytics & Reporting
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>Freshpaint Implementation — Instrument key funnels for V4 UI and clinical flows</li>
+              <li>MV30-2048 — White Labeling</li>
+              <li>ADA compliance across all of application</li>
+              <li>User Feedback button</li>
+              <li><em>Exit</em>: Event taxonomy live; accessibility compliance; user feedback system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Late December -->
+      <div class="section">
+        <div class="title">
+          <h2>Late December — Pre-freeze</h2>
+          <span class="badge">Stabilize</span>
+        </div>
+        <div class="grid">
+          <div class="card span-12">
+            <ul class="list">
+              <li>Small batch: high-severity bug fixes only; defer large features.</li>
+              <li>Prepare January cut: test data, flags, release notes ready.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q1 2026 -->
+      <div class="section">
+        <div class="title">
+          <h2>Q1 2026 — January → March</h2>
+          <span class="badge">Scale</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">
+              Epic Integration (MV30-2047)
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>Integrate MCG application with Epic EHR system.</li>
+              <li>Exit: Seamless data flow between MCG and Epic.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 5%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              V4 UI/UX Update (MV30-2522)
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>Implement modern UI/UX design system and components.</li>
+              <li>Exit: Consistent, modern interface across all modules.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 10%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              Selective Resource Sharing (MV30-1991)
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>Implement selective sharing controls for resources.</li>
+              <li>Exit: Users can control resource visibility and sharing permissions.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 20%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              Customer Reports (MV30-2040)
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>MVP for 1–2 customers; hardened export/share flow.</li>
+              <li>Exit: First customer-facing report live with SLAs.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 40%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              Internal Reports (MV30-1884)
+              <span class="pill priority">P5</span>
+            </div>
+            <ul class="list">
+              <li>MVP: operational metrics + clinician usage dashboards.</li>
+              <li>Exit: 2–3 dashboards live; data dictionary v1.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 20%"></span></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">
+              Custom Resources (MV30-2048)
+              <span class="pill priority">P4</span>
+            </div>
+            <ul class="list">
+              <li>Custom resources by module/org and Resources (MV30-2042).</li>
+              <li>Exit: Assign → view → track usage; admin controls in place.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 70%"></span></div>
+          </div>
+          <div class="card span-12">
+            <div class="card-title">E2E Coverage Expansion <span class="pill dep">Quality</span></div>
+            <ul class="list">
+              <li>Expand beyond critical flows; stabilize.</li>
+              <li>Exit: Target coverage achieved; stable pipelines.</li>
+            </ul>
+            <div class="progress" aria-label="progress"><span style="--value: 90%"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <h2>Q1 2026 — February</h2>
+          <span class="badge">Adopt</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">Epic Integration (MV30-2047) <span class="pill priority">P4</span></div>
+            <ul class="list">
+              <li>Integrate MCG application with Epic EHR system.</li>
+              <li>Exit: Seamless data flow between MCG and Epic.</li>
+            </ul>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">V4 UI/UX Update (MV30-2522) <span class="pill priority">P4</span></div>
+            <ul class="list">
+              <li>Implement modern UI/UX design system and components.</li>
+              <li>Exit: Consistent, modern interface across all modules.</li>
+            </ul>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">Selective Resource Sharing (MV30-1991) <span class="pill priority">P4</span></div>
+            <ul class="list">
+              <li>Implement selective sharing controls for resources.</li>
+              <li>Exit: Users can control resource visibility and sharing permissions.</li>
+            </ul>
+          </div>
+          <div class="card span-6">
+            <div class="card-title">Customer Reports (MV30-2040) <span class="pill priority">P4</span></div>
+            <ul class="list">
+              <li>MVP for 1–2 customers; hardened export/share flow.</li>
+              <li>Exit: First customer-facing report live with SLAs.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <h2>Q1 2026 — March</h2>
+          <span class="badge">Expand</span>
+        </div>
+        <div class="grid">
+          <div class="card span-6">
+            <div class="card-title">Content Excellence: Resources <span class="pill priority">P4</span></div>
+            <ul class="list">
+              <li>Custom resources by module/org (MV30-2048) and Resources (MV30-2042).</li>
+              <li>Exit: Assign → view → track usage; admin controls in place.</li>
+            </ul>
+          </div>
+          <div class="card span-12">
+            <div class="card-title">E2E Coverage Expansion <span class="pill dep">Quality</span></div>
+            <ul class="list">
+              <li>Expand beyond critical flows; stabilize.</li>
+              <li>Exit: Target coverage achieved; stable pipelines.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="title">
+          <h2>Risks & Mitigations</h2>
+          <span class="badge">Govern</span>
+        </div>
+        <div class="grid">
+          <div class="card span-12">
+            <ul class="list">
+              <li><strong>Holiday bandwidth</strong>: lock large changes by mid-Dec; deliver behind flags.</li>
+              <li><strong>Migration risk</strong>: PR checks; staging rollback tests prior to prod.</li>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">MCG Roadmap • Updated Oct 2025</div>
+    </div>
+  </body>
+  </html>
+
+
+
